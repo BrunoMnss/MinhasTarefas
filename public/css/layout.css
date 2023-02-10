@@ -1,0 +1,20 @@
+body {
+	background-color: rgb(250 250 250);
+}
+
+.branco {
+	color: white;
+}
+
+.bg-cinza {	
+	background-color: rgb(107 114 128);
+}
+
+.bg-cinza-400 {	
+	background-color: rgb(156 163 175);
+}
+
+.toast-top-center {
+    top: 12px;
+ 	margin: auto;
+}
