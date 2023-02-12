@@ -25,25 +25,31 @@
                 <h4 class="text-center mt-1 mb-1">
                     Tarefas do dia - [ <script>
                         document.write(new Date().toLocaleDateString());
-                    </script> ]
+                    </script> ] 
                 </h4>
             </div>
-           
+
             <div class="card-body">
-            @foreach($data as $key=>$tarefas)
-                
+                @foreach($data as $key=>$tarefas)
+
 
                 <div class="card-header">
-                
-                    <p><b>{{$tarefas->horario}} Hrs.</b></p>
+
+                    <p><b>{{$tarefas->horario}} Hrs.</b></p> 
                     <div class="">
                         <ul>
 
                             <div class="form-check form-switch">
+                                
                                 <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
                                 <label class="form-check-label" for="flexSwitchCheckDefault">{{$tarefas->tarefa}}</label>
+
+                                <div class="right">
+                                    <a type="button" class="btn-per btn-danger btn-sm" href="{{ route('homepage.del', $tarefas->id) }}"><i class="fas fa-calendar-times"></i></a>
+                                </div>
+
                             </div>
-                            <li><i class="fa-sharp fa-solid fa-circle-trash"></i></li>
+
                         </ul>
                     </div>
                 </div>

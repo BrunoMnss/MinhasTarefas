@@ -17,12 +17,17 @@ class TarefasGeral extends Model
         'tarefa',
     ];
 
+    protected $dates = [
+        'dia',
+    ];
+
     public function store($data){
         return $this->create($data);
     }
 
     public function getAll(){
-        return $this->select('id', 'dia', 'horario', 'tarefa')->get();
+        
+        return $this->select('id', 'dia', 'horario', 'tarefa')->orderBy('dia', 'asc')->orderBy('horario', 'asc')->get();
     }
 
     public function getTarefaById($id){
@@ -36,4 +41,5 @@ class TarefasGeral extends Model
     public function deleteById($id){
         return $this->where('id', $id)->delete();
     }
+
 }

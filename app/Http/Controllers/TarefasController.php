@@ -17,37 +17,57 @@ class TarefasController extends Controller
         $this->tarefasGeral = $tarefasGeral;
     }
 
-    public function index(){
-        $data=$this->tarefasGeral->getAll();
-        return view('tarefas-geral', compact('data'));
+    public function index()
+    {
+
+        $data = $this->tarefasGeral->getAll();
+
+        $data->filter(function($query){
+            
+        });
+
+        $jaTem = '';
+        $semana='';
+
+        $firstday = date('d/m/Y', strtotime("this week"));
+        $semana .= "[ ". $firstday. "  -  ";
+
+        $lastday = date('d/m/Y', strtotime("sunday +0 week"));
+        $semana .= $lastday. " ] ";
+
+        return view('tarefas-geral', compact('data', 'semana', 'jaTem'));
     }
 
-    public function create(Request $request){
+    public function create(Request $request)
+    {
         return view('tarefas-criar');
     }
 
-    public function store(AddTarefa $request){
-        $created=$this->tarefasGeral->store($request->validated());
-        if(empty($created)){
+    public function store(AddTarefa $request)
+    {
+        $created = $this->tarefasGeral->store($request->validated());
+        if (empty($created)) {
             return redirect()->back();
         }
         return redirect()->route('tarefa.index');
     }
 
-    public function edit(Request $request, $id){
-        $tarefas=$this->tarefasGeral->getTarefaById($id);
+    public function edit(Request $request, $id)
+    {
+        $tarefas = $this->tarefasGeral->getTarefaById($id);
         return view('tarefa-editar', compact('tarefas'));
     }
+
+    public function update(EditTarefa $request, $id)
+    {
+        $tarefas = $this->tarefasGeral->updateById($id, $request->validated());
+        return redirect()->route('tarefa.index');
+    }
+
+    public function delete(Request $request, $id)
+    {
+        $tarefas = $this->tarefasGeral->deleteById($id);
+        return redirect()->route('tarefa.index');
+    }
     
-    public function update(EditTarefa $request, $id){
-        $tarefas=$this->tarefasGeral->updateById($id, $request->validated());
-        return redirect()->route('tarefa.index');
-    }
-
-    public function delete(Request $request, $id){
-        $tarefas=$this->tarefasGeral->deleteById($id);
-        return redirect()->route('tarefa.index');
-    }
-
- 
 }

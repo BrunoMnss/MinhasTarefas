@@ -27,8 +27,12 @@ Route::get('/tarefas-criar/', [$tarefas, 'create'])->name('tarefa.create');
 
 Route::post('/tarefas-salvar/', [$tarefas, 'store'])->name('tarefa.store');
 
-Route::get('/tarefas-editar/{id}', [$tarefas, 'edit'])->name('tarefa.edit');
+Route::get('/tarefa-editar/{id}', [$tarefas, 'edit'])->name('tarefa.edit');
 
-Route::put('/tarefas-alterar/{id}', [$tarefas, 'update'])->name('tarefa.save');
+Route::get('/tarefa-edit/{id}', [$homepage, 'edit'])->name('homepage.edit');
 
-Route::get('/tarefa-delete/{$id}', [$tarefas, 'delete'])->name('tarefa.delete');
+Route::put('/tarefa-alterar/{id}', [$tarefas, 'update'])->name('tarefa.save');
+
+Route::get('/tarefa-delete/{id}', [$tarefas, 'delete'])->name('tarefa.delete');
+
+Route::get('/tarefa-exclude/{id}', [$homepage, 'delete'])->name('homepage.del');
