@@ -21,19 +21,15 @@ class TarefasController extends Controller
     {
 
         $data = $this->tarefasGeral->getAll();
-
-        $data->filter(function($query){
-            
-        });
-
+    
         $jaTem = '';
-        $semana='';
+        $semana = '';
 
         $firstday = date('d/m/Y', strtotime("this week"));
-        $semana .= "[ ". $firstday. "  -  ";
+        $semana .= "[ " . $firstday . "  -  ";
 
         $lastday = date('d/m/Y', strtotime("sunday +0 week"));
-        $semana .= $lastday. " ] ";
+        $semana .= $lastday . " ] ";
 
         return view('tarefas-geral', compact('data', 'semana', 'jaTem'));
     }
@@ -69,5 +65,4 @@ class TarefasController extends Controller
         $tarefas = $this->tarefasGeral->deleteById($id);
         return redirect()->route('tarefa.index');
     }
-    
 }

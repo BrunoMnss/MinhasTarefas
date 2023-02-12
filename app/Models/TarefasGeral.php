@@ -27,7 +27,7 @@ class TarefasGeral extends Model
 
     public function getAll(){
         
-        return $this->select('id', 'dia', 'horario', 'tarefa')->orderBy('dia', 'asc')->orderBy('horario', 'asc')->get();
+        return $this->select('id', 'dia', 'horario', 'tarefa')->orderBy('horario', 'asc')->get();
     }
 
     public function getTarefaById($id){

@@ -30,8 +30,8 @@
             </div>
 
             <div class="card-body">
-                @foreach($data as $key=>$tarefas)
-
+                
+            @foreach($data as $key=>$tarefas)
 
                 <div class="card-header">
 
