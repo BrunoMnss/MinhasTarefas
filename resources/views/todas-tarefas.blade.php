@@ -1,7 +1,6 @@
 @section('content')
 @extends('layouts.app')
 <div class="row justify-content-end">
-
     <form action="{{ route('tarefa.allTaskSearch') }}" method="GET">
         <div class="input-group botao-busca" style="width: 45%;">
             <span class="input-group-text" id="basic-addon1"><b>Procurar</b></span>
@@ -9,9 +8,7 @@
             <button type="submit" class="btn btn-secondary"><i class="fas fa-search"></i></button>
         </div>
     </form>
-
 </div>
-
 <div class="row justify-content-center">
     <div class="card border-dark mb-3" style="width: 95%;">
         <div class="table">

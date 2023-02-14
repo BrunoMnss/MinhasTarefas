@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('dia');
             $table->string('horario');
             $table->string('tarefa');
+            $table->boolean('feito')->default(0);
             $table->timestamps();
         });
     }

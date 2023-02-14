@@ -17,7 +17,6 @@
         </div>
     </div>
 </div>
-
 @foreach($newData as $key => $tarefa)
 <div class="container">
     <div class="row justify-content-center">
@@ -38,8 +37,8 @@
                                 <div class="right">
                                     <a type="button" class="btn-per btn-warning btn-sm" href="{{ route('homepage.edit', $horario['id']) }}"><i class="fas fa-edit"></i></a>
                                 </div>
-                                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
-                                <label class="form-check-label" for="flexSwitchCheckDefault">{{$horario['tarefa']}}</label>
+                                <input class="form-check-input checkFeito" type="checkbox" role="switch" tarefa_id="{{$horario['id']}}" {{ $horario['feito'] == 1 ? 'checked' : ''}}>
+                                <label class="form-check-label" for="">{{$horario['tarefa']}}</label>
                                 <div class="right">
                                     <a type="button" class="btn-per btn-danger btn-sm" data href="{{ route('homepage.del', $horario['id']) }}"><i class="fa-solid fa-trash"></i></a>
                                 </div>
@@ -49,11 +48,29 @@
                 </div>
                 @endforeach
             </div>
-
         </div>
     </div>
 </div>
 @endforeach
 @endsection
 @section('scripts')
+<script type="text/javascript">
+    $('.checkFeito').on('click', function() {
+        tarefa_id = $(this).attr('tarefa_id')
+        if ($(this).is(':checked')) {
+            feito = 1
+        } else {
+            feito = 0
+        }
+        
+        $.ajax({
+            url: "{{ route('tarefa.editar.feito') }}",
+            data: {
+                feito: feito,
+                id: tarefa_id,
+            },
+            method: 'put'
+        }).done(response => alert(response))
+    })
+</script>
 @endsection

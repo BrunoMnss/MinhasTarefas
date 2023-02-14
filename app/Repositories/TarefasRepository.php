@@ -39,7 +39,7 @@ class TarefasRepository
 	{
 		return $this->tarefasGeral->store($data);
 	}
-	
+
 	public function getTarefaById($id)
 	{
 		return $this->tarefasGeral->getTarefaById($id);
@@ -49,13 +49,16 @@ class TarefasRepository
 	{
 		return $this->tarefasGeral->updateById($data, $id);
 	}
-	
-	public function delete(Request $request, $id)
+
+	public function editarFeito($feito, $id)
 	{
-		$tarefas = $this->tarefasGeral->deleteById($id);
-		return redirect()->route('tarefa.index');
+		$atualizaFeito = $this->tarefasGeral->editarFeito($feito, $id);
+		if (empty($atualizaFeito)) {
+			return 'Não foi possivel atualizar o status';
+		}
+		return 'Status atualizado';
 	}
-	
+
 	public function getSemanaAtual()
 	{
 		$firstday = date('d/m/Y', strtotime("this week"));
@@ -63,38 +66,25 @@ class TarefasRepository
 		return "[ " . $firstday . "  -  " . $lastday . " ] ";
 	}
 
+	// public function delete(Request $request, $id)
+	// {
+	// 	$tarefas = $this->tarefasGeral->deleteById($id);
+	// 	return redirect()->route('tarefa.index');
+	// }
 	public function getAllTarefas($search)
 	{
 		return $this->tarefasGeral->getAllTarefas($search);
 	}
-	
-	public function allTaskEdit(Request $request, $id)
-	{
-		$tarefas = $this->tarefasGeral->getTarefaById($id);
-		return view('todas-tarefas-editar', compact('tarefas'));
-	}
 
-	public function allTaskDelete(Request $request, $id)
-	{
-		$tarefas = $this->tarefasGeral->deleteById($id);
-		return redirect()->route('tarefa.allTask');
-	}
+	// public function allTaskEdit(Request $request, $id)
+	// {
+	// 	$tarefas = $this->tarefasGeral->getTarefaById($id);
+	// 	return view('todas-tarefas-editar', compact('tarefas'));
+	// }
 
-	public function allTaskSearch(Request $request)
-	{
-		$search = $request->input('search');
-
-		if (empty($search)) {
-			$data = $this->tarefasGeral->getAllTarefas();
-			return view('todas-tarefas', compact('data'));
-		}
-		$data = $this->tarefasGeral->searchTarefa()
-			->where('dia', 'LIKE', '%' . $request['search'] . '%')
-			->orWhere('horario', 'LIKE', '%' . $request['search'] . '%')
-			->orWhere('tarefa', 'LIKE', '%' . $request['search'] . '%')
-			->orWhere('created_at', 'LIKE', '%' . $request['search'] . '%')
-			->get();
-
-		return view('todas-tarefas', compact('data', 'tarefas'));
-	}
+	// public function allTaskDelete(Request $request, $id)
+	// {
+	// 	$tarefas = $this->tarefasGeral->deleteById($id);
+	// 	return redirect()->route('tarefa.allTask');
+	// }
 }

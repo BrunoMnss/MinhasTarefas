@@ -24,10 +24,8 @@ class HomePage extends Model
 
 
     public function getAll(){
-        
         $dt = Carbon::now('America/Sao_Paulo');
-
-        return $this->select('id', 'dia', 'horario', 'tarefa')
+        return $this->select('id', 'dia', 'horario', 'tarefa', 'feito')
         ->orderBy('horario', 'ASC')
         ->whereDay('dia', $dt->day)
         ->get();

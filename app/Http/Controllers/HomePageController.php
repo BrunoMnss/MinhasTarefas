@@ -20,7 +20,6 @@ class HomePageController extends Controller
     protected function index()
     {
         $data = $this->tarefasGeral->getAll()->toArray();
-
         $diaAtual = '';
         $newData = [];
         foreach ($data as $key => $tarefa) {
@@ -34,7 +33,7 @@ class HomePageController extends Controller
             }
             $dia_nome = new DateTime($tarefa['dia']);
             $dia_nome = $dia_nome->format('l');
-            array_push($newData[$diaAtual]['horarios'], ['horario' => $tarefa['horario'], 'tarefa' => $tarefa['tarefa'], 'id' => $tarefa['id'], 'dia_nome' => $dia_nome]);
+            array_push($newData[$diaAtual]['horarios'], ['horario' => $tarefa['horario'], 'feito' => $tarefa['feito'], 'tarefa' => $tarefa['tarefa'], 'id' => $tarefa['id'], 'dia_nome' => $dia_nome]);
         }
         
         return view('welcome1', compact('newData'));

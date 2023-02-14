@@ -76,4 +76,11 @@ class TarefasController extends Controller
         $tarefas = $this->tarefasGeral->deleteById($id);
         return redirect()->route('tarefa.allTask');
     }
+
+    public function editarFeito(Request $request)
+    {
+        $feito = $request->input('feito');
+        $id = $request->input('id');
+        return $this->tarefasRepository->editarFeito($feito, $id);
+    }
 }

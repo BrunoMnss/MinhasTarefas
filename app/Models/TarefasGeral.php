@@ -1,14 +1,10 @@
-
-
 <?php
 
 namespace App\Models;
 
 use Carbon\Carbon;
-use GuzzleHttp\Psr7\Request;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\DB;
 
 class TarefasGeral extends Model
 {
@@ -20,6 +16,7 @@ class TarefasGeral extends Model
         'dia',
         'horario',
         'tarefa',
+        'feito'
     ];
 
     protected $dates = [
@@ -45,12 +42,12 @@ class TarefasGeral extends Model
     {
         $busca =  $this->select('id', 'dia', 'horario', 'tarefa', 'created_at');
         if (!empty($search)) {
-            $busca = $busca->where('dia', 'LIKE', $search . '%') ->orWhere('horario', 'LIKE', $search . '%')->orWhere('tarefa', 'LIKE', $search . '%');
+            $busca = $busca->where('dia', 'LIKE', $search . '%')->orWhere('horario', 'LIKE', $search . '%')->orWhere('tarefa', 'LIKE', $search . '%');
         }
         return $busca
-        ->orderBy('dia', 'ASC')
-        ->orderBy('horario', 'ASC')
-        ->get();
+            ->orderBy('dia', 'ASC')
+            ->orderBy('horario', 'ASC')
+            ->get();
     }
 
     public function searchTarefa()
@@ -72,5 +69,10 @@ class TarefasGeral extends Model
     public function deleteById($id)
     {
         return $this->where('id', $id)->delete();
+    }
+
+    public function editarFeito($feito, $id)
+    {
+        return $this->where('id', $id)->update(['feito' => $feito]);
     }
 }
