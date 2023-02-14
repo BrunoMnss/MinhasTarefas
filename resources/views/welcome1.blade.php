@@ -18,53 +18,42 @@
     </div>
 </div>
 
+@foreach($newData as $key => $tarefa)
 <div class="container">
     <div class="row justify-content-center">
         <div class="card border-dark mb-3">
             <div class="card-header row justify-content-center">
                 <h4 class="text-center mt-1 mb-1">
-                    Tarefas do dia - [ <script>
-                        document.write(new Date().toLocaleDateString());
-                    </script> ] 
+                    Tarefas do dia - [ {{$key}} ]
                 </h4>
             </div>
 
             <div class="card-body">
-                
-            @foreach($data as $key=>$tarefas)
-
+                @foreach($tarefa['horarios'] as $horario)
                 <div class="card-header">
-
-                    <p><b>{{$tarefas->horario}} Hrs.</b></p> 
+                    <p><b>{{$horario['horario']}} Hrs.</b></p>
                     <div class="">
                         <ul>
-
                             <div class="form-check form-switch">
-                                
-                                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
-                                <label class="form-check-label" for="flexSwitchCheckDefault">{{$tarefas->tarefa}}</label>
-
                                 <div class="right">
-                                    <a type="button" class="btn-per btn-danger btn-sm" href="{{ route('homepage.del', $tarefas->id) }}"><i class="fas fa-calendar-times"></i></a>
+                                    <a type="button" class="btn-per btn-warning btn-sm" href="{{ route('homepage.edit', $horario['id']) }}"><i class="fas fa-edit"></i></a>
                                 </div>
-
+                                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+                                <label class="form-check-label" for="flexSwitchCheckDefault">{{$horario['tarefa']}}</label>
+                                <div class="right">
+                                    <a type="button" class="btn-per btn-danger btn-sm" data href="{{ route('homepage.del', $horario['id']) }}"><i class="fa-solid fa-trash"></i></a>
+                                </div>
                             </div>
-
                         </ul>
                     </div>
                 </div>
-
                 @endforeach
-
             </div>
+
         </div>
     </div>
 </div>
-
-
-
+@endforeach
 @endsection
 @section('scripts')
-
-
 @endsection

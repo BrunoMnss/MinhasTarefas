@@ -24,7 +24,6 @@ class EditTarefa extends FormRequest
     public function rules()
     {
         return [
-            'dia' => ['required'],
             'horario' => ['required'],
             'tarefa' => ['required', 'min:10', 'max:500'],
         ];

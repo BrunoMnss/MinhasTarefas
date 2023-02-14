@@ -12682,3 +12682,20 @@ fieldset:disabled .btn {
 .btn-modal {
   margin: 5px;
 }
+
+.botao-busca{
+  justify-content: end;
+  margin-right: 35px;
+  margin-bottom: 35px;
+  margin-top: 20px;
+}
+
+.texto-header{
+  font-size:large;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.texto-tabela{
+  font-weight: 500;
+  font-family: Haettenschweiler, 'Arial Narrow Bold', sans-serif
+}

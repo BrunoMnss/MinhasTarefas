@@ -13,18 +13,18 @@
                 <div class="card-header mb-5" style="text-align: center;"><b>{{ __('Editar Tarefa') }}</b></div>
 
                 <div class="card-body">
-                    <form method="POST" action="">
+                    <form method="POST" action="{{ route('tarefa.save', $tarefas->id) }}">
+                        @method('PUT')
                         @csrf
 
-
+                        
                         <div class="center-add">
 
-                            <label class="data" for="birthday"><b>Data:</b></label>
-                            <input type="date" id="birthday" name="birthday">
+                            <label class="date" for="birthday"><b>Data: </b>{{$tarefas->dia->format('d/m/Y')}}</label>
 
 
                             <label class="horas" for="appt"><b>Horario:</b></label>
-                            <input type="time" id="appt" name="appt">
+                            <input type="time" value="{{$tarefas->horario}}" id="appt" name="horario">
 
                         </div>
 
@@ -32,13 +32,23 @@
                         <div class="center-add">
 
                             <div class="form-floating">
-                                <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
-                                <label for="floatingTextarea2">Tarefa</label>
+                                <textarea class="form-control" id="floatingTextarea2" name="tarefa" style="height: 100px">{{$tarefas->tarefa}}</textarea>
+                                <label for="floatingTextarea2"></label>
                             </div>
 
                             <div class="row justify-content-center">
-                                @if($errors->has('idade'))
-                                {{ $errors->first('idade') }}
+                                @if($errors->has('tarefa'))
+                                {{ $errors->first('tarefa') }}
+                                @endif
+                            </div>
+                            <div class="row justify-content-center">
+                                @if($errors->has('dia'))
+                                {{ $errors->first('dia') }}
+                                @endif
+                            </div>
+                            <div class="row justify-content-center">
+                                @if($errors->has('horario'))
+                                {{ $errors->first('horario') }}
                                 @endif
                             </div>
 
