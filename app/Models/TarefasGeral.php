@@ -1,3 +1,5 @@
+
+
 <?php
 
 namespace App\Models;
@@ -39,18 +41,22 @@ class TarefasGeral extends Model
             ->get();
     }
 
-    public function getAllTarefas()
+    public function getAllTarefas($search)
     {
-
-        return $this->select('id', 'dia', 'horario', 'tarefa', 'created_at')
-            ->orderBy('dia', 'ASC')
-            ->orderBy('horario', 'ASC')
-            ->get();
+        $busca =  $this->select('id', 'dia', 'horario', 'tarefa', 'created_at');
+        if (!empty($search)) {
+            $busca = $busca->where('dia', 'LIKE', $search . '%') ->orWhere('horario', 'LIKE', $search . '%')->orWhere('tarefa', 'LIKE', $search . '%');
+        }
+        return $busca
+        ->orderBy('dia', 'ASC')
+        ->orderBy('horario', 'ASC')
+        ->get();
     }
 
-    public function searchTarefa(){
+    public function searchTarefa()
+    {
         return $this->select('id', 'dia', 'horario', 'tarefa', 'created_at')
-        ->get();
+            ->get();
     }
 
     public function getTarefaById($id)
@@ -58,7 +64,7 @@ class TarefasGeral extends Model
         return $this->select('id', 'dia', 'horario', 'tarefa')->where('id', $id)->first();
     }
 
-    public function updateById($id, $data)
+    public function updateById($data, $id)
     {
         return $this->where('id', $id)->update($data);
     }

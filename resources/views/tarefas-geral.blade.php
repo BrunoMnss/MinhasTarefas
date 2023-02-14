@@ -20,7 +20,7 @@
             </div>
             <div class="card-body">
 
-                @foreach($newData as $key => $tarefa)
+                @foreach($data as $key => $tarefa)
                 <div class="accordion" id="accordion_{{$tarefa['id']}}">
                     <div class="accordion-item">
                         <h2 class="accordion-header" id="heading_{{$tarefa['id']}}">

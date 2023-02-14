@@ -1,16 +1,16 @@
 @section('content')
 @extends('layouts.app')
-<form action="{{ route('tarefa.allTaskSearch') }}" method="GET">
 <div class="row justify-content-end">
-    
-    <div class="input-group botao-busca" style="width: 45%;">
-        <span class="input-group-text" id="basic-addon1"><b>Procurar</b></span>
-        <input type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1" name="search">
-        <button type="submit" class="btn btn-secondary"><i class="fas fa-search"></i></button>
-    </div>
-    
+
+    <form action="{{ route('tarefa.allTaskSearch') }}" method="GET">
+        <div class="input-group botao-busca" style="width: 45%;">
+            <span class="input-group-text" id="basic-addon1"><b>Procurar</b></span>
+            <input type="text" class="form-control" value="{{ $search ?? ''}}" name="search">
+            <button type="submit" class="btn btn-secondary"><i class="fas fa-search"></i></button>
+        </div>
+    </form>
+
 </div>
-</form>
 
 <div class="row justify-content-center">
     <div class="card border-dark mb-3" style="width: 95%;">
@@ -40,7 +40,7 @@
                         </td>
 
                     </tr>
-          
+
                 </tbody>
                 @endforeach
             </table>
