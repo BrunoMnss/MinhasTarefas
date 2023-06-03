@@ -17,17 +17,18 @@
         </div>
     </div>
 </div>
-@foreach($newData as $key => $tarefa)
+
 <div class="container">
     <div class="row justify-content-center">
         <div class="card border-dark mb-3">
             <div class="card-header row justify-content-center">
                 <h4 class="text-center mt-1 mb-1">
-                    Tarefas do dia - [ {{$key}} ]
+                    Tarefas do dia - [ {{ now()->format('d/m/Y') }} ]
                 </h4>
             </div>
 
             <div class="card-body">
+            @foreach($data as $key => $tarefa)
                 @foreach($tarefa['horarios'] as $horario)
                 <div class="card-header">
                     <p><b>{{$horario['horario']}} Hrs.</b></p>
@@ -51,9 +52,10 @@
         </div>
     </div>
 </div>
+
 @endforeach
-@endsection
-@section('scripts')
+
+<script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
 <script type="text/javascript">
     $('.checkFeito').on('click', function() {
         tarefa_id = $(this).attr('tarefa_id')
@@ -64,8 +66,9 @@
         }
         
         $.ajax({
-            url: "{{ route('tarefa.editar.feito') }}",
+            url: "{{ route('homepage.editar.feito') }}",
             data: {
+                "_token": "{{csrf_token()}}",
                 feito: feito,
                 id: tarefa_id,
             },
@@ -73,4 +76,7 @@
         }).done(response => alert(response))
     })
 </script>
+@endsection
+@section('scripts')
+
 @endsection

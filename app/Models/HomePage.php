@@ -16,6 +16,7 @@ class HomePage extends Model
         'dia',
         'horario',
         'tarefa',
+        'feito'
     ];
 
     protected $dates = [
@@ -24,10 +25,9 @@ class HomePage extends Model
 
 
     public function getAll(){
-        $dt = Carbon::now('America/Sao_Paulo');
         return $this->select('id', 'dia', 'horario', 'tarefa', 'feito')
-        ->orderBy('horario', 'ASC')
-        ->whereDay('dia', $dt->day)
+        ->whereDate('dia', [Carbon::now('America/Sao_Paulo')])
+        ->orderBy('horario', 'asc')
         ->get();
     }
 
@@ -41,5 +41,10 @@ class HomePage extends Model
 
     public function deleteById($id){
         return $this->where('id', $id)->delete();
+    }
+
+    public function editarFeito($feito, $id)
+    {
+        return $this->where('id', $id)->update(['feito' => $feito]);
     }
 }

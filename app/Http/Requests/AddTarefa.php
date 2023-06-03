@@ -16,7 +16,7 @@ class AddTarefa extends FormRequest
         return [
             'dia' => ['required'],
             'horario' => ['required'],
-            'tarefa' => ['required', 'min:5', 'max:500'],
+            'tarefa' => ['required', 'min:5', 'max:175'],
         ];
     }
 
@@ -25,7 +25,7 @@ class AddTarefa extends FormRequest
         return [
             'required' => 'O campo :attribute deve ser preenchido',
 
-            'tarefa.max' => 'A tarefa nao pode conter mais que 500 caracteres.',
+            'tarefa.max' => 'A tarefa nao pode conter mais que 175 caracteres.',
             'tarefa.min' => 'A tarefa deve conter ao menos 5 caracteres.',
         ];
     }

@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AddTarefa;
 use App\Http\Requests\EditTarefa;
+use App\Models\TarefasGeral;
 use App\Repositories\TarefasRepository;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class TarefasController extends Controller
 {
@@ -53,27 +55,34 @@ class TarefasController extends Controller
 
     public function delete(Request $request, $id)
     {
-        $tarefas = $this->tarefasGeral->deleteById($id);
+        $tarefas = $this->tarefasRepository->deleteById($id);
         return redirect()->route('tarefa.index');
     }
 
     public function allTask(Request $request)
     {
+        
         $search = $request->input('search');
         $data = $this->tarefasRepository->getAllTarefas($search);
-
         return view('todas-tarefas', compact('data', 'search'));
     }
 
     public function allTaskEdit(Request $request, $id)
     {
-        $tarefas = $this->tarefasGeral->getTarefaById($id);
+        $tarefas = $this->tarefasRepository->getAllTarefaById($id);
         return view('todas-tarefas-editar', compact('tarefas'));
+    }
+
+    public function allTaskUpdate(EditTarefa $request, $id)
+    {
+        $data = $request->validated(); //dados para atualizar a tarefa 
+        $tarefas = $this->tarefasRepository->updateById($data, $id);
+        return redirect()->route('tarefa.allTask');
     }
 
     public function allTaskDelete(Request $request, $id)
     {
-        $tarefas = $this->tarefasGeral->deleteById($id);
+        $tarefas = $this->tarefasRepository->deleteAllTaskById($id);
         return redirect()->route('tarefa.allTask');
     }
 

@@ -12679,6 +12679,14 @@ fieldset:disabled .btn {
   text-align: right;
 }
 
+.right2 {
+  justify-content: end;
+}
+
+.left {
+  justify-content: start;
+}
+
 .btn-modal {
   margin: 5px;
 }
@@ -12697,5 +12705,10 @@ fieldset:disabled .btn {
 
 .texto-tabela{
   font-weight: 500;
-  font-family: Haettenschweiler, 'Arial Narrow Bold', sans-serif
+  font-family: Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+.pagination {
+  display: flex; 
+  justify-content: flex-end;
 }

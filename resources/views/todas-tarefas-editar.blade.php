@@ -13,7 +13,7 @@
                 <div class="card-header mb-5" style="text-align: center;"><b>{{ __('Editar Tarefa') }}</b></div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('tarefa.save', $tarefas->id) }}">
+                    <form method="POST" action="{{ route('tarefa.allTaskSave', $tarefas->id) }}">
                         @method('PUT')
                         @csrf
 

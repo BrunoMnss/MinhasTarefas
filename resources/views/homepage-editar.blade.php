@@ -10,7 +10,7 @@
                 </a>
             </div>
             <div class="card">
-                <div class="card-header mb-5" style="text-align: center;"><b>{{ __('Adicionar Tarefa') }}</b></div>
+                <div class="card-header mb-5" style="text-align: center;"><b>{{ __('Editar Tarefa') }}</b></div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('homepage.save', $tarefas->id) }}">

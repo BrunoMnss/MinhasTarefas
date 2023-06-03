@@ -25,7 +25,7 @@ class EditTarefa extends FormRequest
     {
         return [
             'horario' => ['required'],
-            'tarefa' => ['required', 'min:10', 'max:500'],
+            'tarefa' => ['required', 'min:5', 'max:175'],
         ];
     }
 
@@ -34,8 +34,8 @@ class EditTarefa extends FormRequest
         return [
             'required' => 'O campo :attribute deve ser preenchido',
 
-            'tarefa.max' => 'O campo <b>TAREFA</b> nao pode conter mais que 500 caracteres.',
-            'tarefa.min' => 'O campo <b>TAREFA</b> deve conter ao menos 10 caracteres.',
+            'tarefa.max' => 'O campo <b>TAREFA</b> nao pode conter mais que 175 caracteres.',
+            'tarefa.min' => 'O campo <b>TAREFA</b> deve conter ao menos 5 caracteres.',
         ];
     }
 }

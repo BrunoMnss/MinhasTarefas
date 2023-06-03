@@ -20,6 +20,7 @@ $homepage = App\Http\Controllers\HomePageController::class;
 Route::get('/', [$homepage, 'index'])->name('home.index');
 Route::get('/homepage-edit/{id}', [$homepage, 'edit'])->name('homepage.edit');
 Route::put('/homepage-alter/{id}', [$homepage, 'update'])->name('homepage.save');
+Route::put('/homepage-editar-feito', [$homepage, 'editarFeito'])->name('homepage.editar.feito');
 Route::get('/homepage-del/{id}', [$homepage, 'delete'])->name('homepage.del');
 
 $tarefas = App\Http\Controllers\TarefasController::class;
@@ -33,7 +34,8 @@ Route::get('/tarefas-delete/{id}', [$tarefas, 'delete'])->name('tarefa.delete');
 // Todas Tarefas Page
 Route::get('/todas-tarefas', [$tarefas, 'allTask'])->name('tarefa.allTask');
 Route::get('/todas-tarefas-edit/{id}', [$tarefas, 'allTaskEdit'])->name('tarefa.allTaskEdit');
+Route::put('/todas-tarefas-save/{id}', [$tarefas, 'allTaskUpdate'])->name('tarefa.allTaskSave');
 Route::get('/todas-tarefas-delete/{id}', [$tarefas, 'allTaskDelete'])->name('tarefa.allTaskDelete');
-Route::get('/todas-tarefas-pesquisa', [$tarefas, 'allTaskSearch'])->name('tarefa.allTaskSearch');
+Route::get('/todas-tarefas-pesquisa', [$tarefas, 'allTask'])->name('tarefa.allTaskSearch');
 
 

@@ -4,56 +4,48 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\EditTarefa;
-use App\Models\HomePage;
 use DateTime;
+use App\Repositories\HomePageRepository;
 use Illuminate\Http\Request;
 
 class HomePageController extends Controller
 {
-    protected $tarefasGeral;
+    protected $homePageRepository;
 
-    public function __construct(HomePage $tarefasGeral)
+    public function __construct(HomePageRepository $homePageRepository)
     {
-        $this->tarefasGeral = $tarefasGeral;
+        $this->homePageRepository = $homePageRepository;
     }
 
     protected function index()
     {
-        $data = $this->tarefasGeral->getAll()->toArray();
-        $diaAtual = '';
-        $newData = [];
-        foreach ($data as $key => $tarefa) {
-            $formataDia = new DateTime($tarefa['dia']);
-            $formataDia = $formataDia->format('d/m/Y');
-            if ($diaAtual != $formataDia) {
-                $diaAtual = $formataDia;
-                $newData[$diaAtual] = [];
-                $newData[$diaAtual]['id'] = $tarefa['id'];
-                $newData[$diaAtual]['horarios'] = [];
-            }
-            $dia_nome = new DateTime($tarefa['dia']);
-            $dia_nome = $dia_nome->format('l');
-            array_push($newData[$diaAtual]['horarios'], ['horario' => $tarefa['horario'], 'feito' => $tarefa['feito'], 'tarefa' => $tarefa['tarefa'], 'id' => $tarefa['id'], 'dia_nome' => $dia_nome]);
-        }
-        
-        return view('welcome1', compact('newData'));
+        $data = $this->homePageRepository->getAll();
+        return view('welcome1', compact('data'));
     }   
 
     public function edit(Request $request, $id)
     {
-        $tarefas = $this->tarefasGeral->getTarefaById($id);
+        $tarefas = $this->homePageRepository->getTarefaById($id);
         return view('homepage-editar', compact('tarefas'));
     }
 
     public function update(EditTarefa $request, $id)
     {
-        $tarefas = $this->tarefasGeral->updateById($id, $request->validated());
+        $data = $request->validated(); 
+        $tarefas = $this->homePageRepository->updateById($data, $id);
         return redirect()->route('home.index');
     }
 
     public function delete(Request $request, $id){
-        $tarefas=$this->tarefasGeral->deleteById($id);
+        $tarefas=$this->homePageRepository->deleteById($id);
         return redirect()->route('home.index');
+    }
+
+    public function editarFeito(Request $request)
+    {
+        $feito = $request->input('feito');
+        $id = $request->input('id');
+        return $this->homePageRepository->editarFeito($feito, $id);
     }
 
     

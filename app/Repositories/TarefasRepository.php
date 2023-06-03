@@ -59,6 +59,26 @@ class TarefasRepository
 		return 'Status atualizado';
 	}
 
+	public function deleteById($id)
+	{
+		return $this->tarefasGeral->deleteById($id);	
+	}
+
+	public function getAllTarefas($search)
+	{
+		return $this->tarefasGeral->getAllTarefas($search);
+	}
+
+	public function getAllTarefaById($id)
+	{
+		return $this->tarefasGeral->getTarefaById($id);
+	}
+
+	public function deleteAllTaskById($id)
+	{
+		return $this->tarefasGeral->deleteById($id);
+	}
+
 	public function getSemanaAtual()
 	{
 		$firstday = date('d/m/Y', strtotime("this week"));
@@ -66,25 +86,4 @@ class TarefasRepository
 		return "[ " . $firstday . "  -  " . $lastday . " ] ";
 	}
 
-	// public function delete(Request $request, $id)
-	// {
-	// 	$tarefas = $this->tarefasGeral->deleteById($id);
-	// 	return redirect()->route('tarefa.index');
-	// }
-	public function getAllTarefas($search)
-	{
-		return $this->tarefasGeral->getAllTarefas($search);
-	}
-
-	// public function allTaskEdit(Request $request, $id)
-	// {
-	// 	$tarefas = $this->tarefasGeral->getTarefaById($id);
-	// 	return view('todas-tarefas-editar', compact('tarefas'));
-	// }
-
-	// public function allTaskDelete(Request $request, $id)
-	// {
-	// 	$tarefas = $this->tarefasGeral->deleteById($id);
-	// 	return redirect()->route('tarefa.allTask');
-	// }
 }

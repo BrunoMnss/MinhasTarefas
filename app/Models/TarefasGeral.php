@@ -4,7 +4,9 @@ namespace App\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Factories\HasFactory as FactoriesHasFactory;
 use Illuminate\Database\Eloquent\Model;
+
 
 class TarefasGeral extends Model
 {
@@ -47,14 +49,9 @@ class TarefasGeral extends Model
         return $busca
             ->orderBy('dia', 'ASC')
             ->orderBy('horario', 'ASC')
-            ->get();
+            ->paginate(15);    
     }
 
-    public function searchTarefa()
-    {
-        return $this->select('id', 'dia', 'horario', 'tarefa', 'created_at')
-            ->get();
-    }
 
     public function getTarefaById($id)
     {
@@ -73,6 +70,6 @@ class TarefasGeral extends Model
 
     public function editarFeito($feito, $id)
     {
-        return $this->where('id', $id)->update(['feito' => $feito]);
+        return $this->where('id', $id)->update($feito);
     }
 }
